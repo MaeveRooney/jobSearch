@@ -23,28 +23,33 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         	if(session_id() == '') {
         		// session isn't started
         		session_start();
-        		$_SESSION['name']=$user["fullName"];
-        		$_SESSION['userType']='jobSeeker';
-        		$_SESSION['username']=$user["username"];
 			}
+			$_SESSION['name']=$user["fullName"];
+			$_SESSION['userType']='jobSeeker';
+			$_SESSION['username']=$user["username"];
+			$_SESSION['email']=$user["email"];
+			$_SESSION['jobSeekerID']=$user["jobSeeker_id"];
+			$_SESSION['skills'] = $db->getUserSkills((int) $user["jobSeeker_id"]);
         	$url = "http://maeverooney.com/jobseekerpage.php";
         } elseif ($admin) {
         	if(session_id() == '') {
         		// session isn't started
         		session_start();
-        		$_SESSION['name']=$admin["name"];
-        		$_SESSION['userType']='company';
-        		$_SESSION['username']=$admin["username"];
 			}
-        	$url = "http://maeverooney.com/adminpage.php";
+			$_SESSION['name']=$admin["name"];
+			$_SESSION['userType']='employer';
+			$_SESSION['username']=$admin["username"];
+			$_SESSION['email']=$admin["email"];
+			$_SESSION['employerID']=$admin["employer_id"];
+        	$url = "http://maeverooney.com/employerpage.php";
         } else {
             // user not found
             //redirect back to login page with error message user not found
             if(session_id() == '') {
         		// session isn't started
         		session_start();
-        		$_SESSION['error']='login failed. try again';
 			}
+			$_SESSION['error']='Login failed. Please try again';
             $url = "http://maeverooney.com/signin.php";
         }
         header( "Location: $url" );

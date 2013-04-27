@@ -14,7 +14,7 @@ mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`companyLocations`') or d
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobSeekerSkills`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`skills`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`companies`') or die(mysql_error());
-mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobseekers`') or die(mysql_error());
+mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobSeekers`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`users`') or die(mysql_error());
 
 

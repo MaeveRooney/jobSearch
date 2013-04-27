@@ -44,10 +44,10 @@
           <a class="brand" href="homecheck.php">Job Search</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="homecheck.php">Home</a></li>
+              <li><a href="homecheck.php">Home</a></li>
               <li><a href="register.php">Register</a></li>
-              <li><a href="signin.php">Log Out</a></li>
-              <li><a href="logout.php">Log In</a></li>
+              <li class="active"><a href="logout.php">Log Out</a></li>
+              <li><a href="signin.php">Log In</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

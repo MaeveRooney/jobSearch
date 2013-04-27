@@ -1,9 +1,17 @@
-<?php session_start(); ?>
+<?php session_start();
+	// check to see if user logged in. if not direct to signin page
+	if ($_SESSION['name'] == '') {
+		$_SESSION['error']='You must log in to view this page';
+        $url = "http://maeverooney.com/signin.php";
+        header( "Location: $url" );
+        exit();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Jobseeker Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -42,28 +50,73 @@
           </button>
           <a class="brand" href="homecheck.php">Job Search</a>
           <div class="nav-collapse collapse">
+          	<?php if ($_SESSION['name'] != '') {?>
+				<p class="navbar-text pull-right">
+				  Logged in as <?php echo $_SESSION['name']; ?>
+				</p>
+			<?php } else {?>
+				<p class="navbar-text pull-right"><?php echo "You are not logged in";?></p>
+			<?php } ?>
             <ul class="nav">
               <li class="active"><a href="homecheck.php">Home</a></li>
               <li><a href="register.php">Register</a></li>
-              <li><a href="signin.php">Log Out</a></li>
-              <li><a href="logout.php">Log In</a></li>
+              <li><a href="logout.php">Log Out</a></li>
+              <li><a href="signin.php">Log In</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
-    <div class="container">
+		<br/><br/>
 
-		<h1>job seeker login success</h1>
+		<div class="container-fluid">
+			<h1>Job Seeker Home Page</h1>
+			<br/><br/>
+		  <div class="row-fluid">
+			<div class="span3">
+			  <div class="well sidebar-nav">
+				<ul class="nav nav-list">
+				  <li class="nav-header">User Details</li>
+				  <li>Name: <?php echo $_SESSION['name']; ?></li>
+				  <li>Username: <?php echo $_SESSION['username']; ?></li>
+				  <li>Email: <?php echo $_SESSION['email']; ?></li>
+				</ul>
+			  </div><!--/.well -->
+			</div><!--/span-->
 
-		<?php
-		//retrieve session data
-		echo $_SESSION['name'] . " you are logged in";
-		echo "<br>username= ". $_SESSION['username'];
-		?>
+			<div class="span9">
 
-    </div> <!-- /container -->
+				<h3>My Skills</h3>
+					<form method="POST" id="jobSeekerSkillForm" action="registerpost.php" onsubmit="return ValidateRegister()">
+						<input type="hidden" name="tag" value="addjobseekerskills"/>
+						<div class="span3">
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="1" <?php if (in_array("CSS",$_SESSION['skills'])) echo checked; ?>/> CSS<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="2" <?php if (in_array("Java",$_SESSION['skills'])) echo checked; ?>/> Java<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="3" <?php if (in_array("JavaScript",$_SESSION['skills'])) echo checked; ?>/> Javascript<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="4" <?php if (in_array("C++",$_SESSION['skills'])) echo checked; ?>/> C++<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="5" <?php if (in_array("C#",$_SESSION['skills'])) echo checked; ?>/> C#<br/>
+						</div>
+						<div class="span3">
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="6" <?php if (in_array("Python",$_SESSION['skills'])) echo checked; ?>/> Python<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="7" <?php if (in_array("PHP",$_SESSION['skills'])) echo checked; ?>/> PHP<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="8" <?php if (in_array("MySQL",$_SESSION['skills'])) echo checked; ?>/> MySQL<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="9" <?php if (in_array("SQLServer",$_SESSION['skills'])) echo checked; ?>/> SQLServer<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="10" <?php if (in_array("Project Management",$_SESSION['skills'])) echo checked; ?>/> Project Management<br/>
+						</div>
+						<div class="span3">
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="11" <?php if (in_array("Team Management",$_SESSION['skills'])) echo checked; ?>/> Team Management<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="12" <?php if (in_array("Customer Service",$_SESSION['skills'])) echo checked; ?>/> Customer Service<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="13" <?php if (in_array("Database Management",$_SESSION['skills'])) echo checked; ?>/> Database Management<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="14" <?php if (in_array("Accounting",$_SESSION['skills'])) echo checked; ?>/> Accounting<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="15" <?php if (in_array("Cryptography",$_SESSION['skills'])) echo checked; ?>/> Cryptography<br/>
+						</div>
+					</form>
+			</div><!--/span-->
+
+    	</div><!--/row-->
+
+    </div><!--/.fluid-container-->
 
     <!-- Le javascript
     ================================================== -->
