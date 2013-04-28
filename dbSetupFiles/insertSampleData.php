@@ -94,8 +94,36 @@ mysql_query($insert);
 $insert="INSERT INTO jobSeekerSkills (skillID, jobSeekerID) VALUES(1,1)";
 mysql_query($insert);
 
+
+$insert="INSERT INTO jobPositions (companyLocationID, name, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(1, 'Junior Accountant',1,'1 year','Assistant to head accountant. Needs to understand big number things and work in a team. Will be expected to learn fast a not steal things', 22000)";
+mysql_query($insert);
+
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(12,1)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(14,1)";
+mysql_query($insert);
+
+$insert="INSERT INTO jobPositions (companyLocationID, name, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(2, 'Junior Java Programmer',1,'2 years','Must understand Java to a high level. Previous experience is a must. We like nice people so mean people need not apply.', 32000)";
+mysql_query($insert);
+
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(2,2)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(8,2)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(7,2)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(9,2)";
+mysql_query($insert);
+
 $nowFormat = date('Y-m-d H:i:s');
 
+$insert="INSERT INTO jobAdvertisements (positionID, dateActivated) VALUES (1,'$nowFormat')";
+mysql_query($insert);
+$insert="INSERT INTO jobAdvertisements (positionID, dateActivated) VALUES (2,'$nowFormat')";
+mysql_query($insert);
+
+$insert="INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES (2,1,'$nowFormat','Please hire me. I need money.',0,0)";
+mysql_query($insert);
 
 function storeUser($username, $email, $password) {
         $hash = hashSSHA($password);

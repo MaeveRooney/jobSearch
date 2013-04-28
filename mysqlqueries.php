@@ -23,53 +23,22 @@ class userFunctions {
      */
     public function getUserSkills($jobSeeker_id) {
         $result = mysql_query("SELECT * "
-        				."FROM jobSeekerSkills "
-        				."INNER JOIN skills "
-        				."ON skills.skill_id=jobSeekerSkills.skillID "
-        				."WHERE jobSeekerSkills.jobSeekerID = '$jobSeeker_id'") or die(mysql_error());
+        				."FROM companies "
+        				."INNER JOIN companyLocations "
+        				."ON companies.company_id=companyLocations.companyID "
+        				."WHERE companyLocations.location_id = '$jobSeeker_id'") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
+        echo $no_of_rows;
         if ($no_of_rows > 0) {
-            $return_arr = array();
-			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-				array_push($return_arr,$row['name']);
-			}
-			return $return_arr;
-        } else {
-            return array();
+            $result = mysql_fetch_array($result);
+			return $result['name'];
         }
     }
 
 }
 
 $newclass = new userFunctions();
-echo count($newclass->getUserSkills(1));
-
-if (in_array("CSS",$newclass->getUserSkills(1)))
-  {
-  echo "CSS Match found";
-  }
-else
-  {
-  echo "CSS Match not found";
-  }
-
-if (in_array("C#",$newclass->getUserSkills(1)))
-  {
-  echo "C# Match found";
-  }
-else
-  {
-  echo "C# Match not found";
-  }
-
-if (in_array("Java",$newclass->getUserSkills(1)))
-  {
-  echo "Java Match found";
-  }
-else
-  {
-  echo "Java Match not found";
-  }
+echo $newclass->getUserSkills(1);
 
 ?>

@@ -112,7 +112,51 @@
 							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="15" <?php if (in_array("Cryptography",$_SESSION['skills'])) echo checked; ?>/> Cryptography<br/>
 						</div>
 					</form>
-			</div><!--/span-->
+					<br><br>
+				</div><!--/span-->
+				<div style="float:right" class="span9">
+					<br>
+					<h3>My Job Applications</h3>
+				</div>
+				<?php
+
+					require_once 'userFunctions.php';
+    				$db = new userFunctions();
+    				$jobSeeker_id=$_SESSION['jobSeekerID'];
+    				$applications = $db->getUserApplications($jobSeeker_id);
+    				if (count($applications) ==0) {
+    					echo "<p>No Applications</p>";
+    				} else {
+						foreach ($applications as $application){
+							echo "<div style='float:right' class='span9 well'><div class='span6'>";
+								echo "<h4>Name of Position: " . $application['name'] . "</h4>";
+								echo "<p><strong>Company Name:</strong> " . $application['companyName'] . "</p>";
+								echo "<p><strong>Location of Job:</strong></p><p> " . $application['address'] . "</p>";
+
+								echo "<p><strong>Date Of Application:</strong> " . $application['salary'] . "</p>";
+								$reviewed = ($application['reviewed'] == 0 ? 'No' : 'Yes');
+								$responded = ($application['responded'] == 0 ? 'No' : 'Yes');
+								echo "<p><strong>Reviewed by Employer:</strong> " . $reviewed . "</p>";
+								echo "<p><strong>Response from Employer:</strong> " . $responded . "</p>";
+								echo "<p><strong>Job Description:</strong></p><p> " . $application['jobDescription'] . "</p>";
+								echo "<p><strong>My Cover Note:</strong></p><p> " . $application['coverNote'] . "</p>";
+							echo "</div>";
+							echo "<div class='span3'>";
+								$skills = $application['skillArray'];
+								if (count($skills) > 0){
+									echo "<h5>Skills required for position:</h5>";
+									foreach ($skills as $skill){
+										echo $skill . "<br>";
+									}
+								}
+							echo "<br>";
+							echo "<h5>Contract Type:</h5><p> " . $application['contract'] . "</p>";
+							echo "<h5>Salary:</h5><p> €" . $application['salary'] . " per year</p>";
+							echo "<h5>Length Of Contract:</h5><p> " . $application['lengthOfContract'] . "</p>";
+							echo "</div></div>";
+						}
+					}
+    			?>
 
     	</div><!--/row-->
 
