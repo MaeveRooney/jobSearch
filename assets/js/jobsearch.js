@@ -1,19 +1,19 @@
-function Show() {
+function ShowDiv() {
 	if(document.getElementById('jobSeekerRadio').checked) {
-	  document.getElementById('jobSeekerDiv').style.display='block';
-	  document.getElementById('employerDiv').style.display='none';
+	  document.getElementById('jobSeekerDiv').style.display = 'block';
+	  document.getElementById('employerDiv').style.display = 'none';
 	}else if(document.getElementById('employerRadio').checked) {
-	  document.getElementById('jobSeekerDiv').style.display='none';
-	  document.getElementById('employerDiv').style.display='block';
+	  document.getElementById('jobSeekerDiv').style.display = 'none';
+	  document.getElementById('employerDiv').style.display = 'block';
 	}
 	document.getElementById("userTypeError").innerHTML="";
 }
 
 function CheckUsernameAvailable(str) {
 	var xmlhttp;
-	if (str.length==0)
+	if (str.length == 0)
 	  {
-	  document.getElementById("usernameError").innerHTML="";
+	  document.getElementById("usernameError").innerHTML = "";
 	  return true;
 	  }
 	if (window.XMLHttpRequest)
@@ -24,11 +24,11 @@ function CheckUsernameAvailable(str) {
 	  {// code for IE6, IE5
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
-	xmlhttp.onreadystatechange=function()
+	xmlhttp.onreadystatechange = function()
 	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 		{
-		document.getElementById("usernameError").innerHTML=xmlhttp.responseText;
+		document.getElementById("usernameError").innerHTML = xmlhttp.responseText;
 		}
 	  }
 	xmlhttp.open("GET","registerGet.php?tag=checkusername&username="+str,true);
@@ -58,11 +58,11 @@ function CheckPasswords() {
 
 function CheckName(str) {
  	if (str == "") {
- 		document.getElementById("nameError").innerHTML="Please enter a company name";
- 		document.getElementById("fullnameError").innerHTML="Please enter your name";
+ 		document.getElementById("nameError").innerHTML = "Please enter a company name";
+ 		document.getElementById("fullnameError").innerHTML = "Please enter your name";
  	} else {
- 		document.getElementById("nameError").innerHTML="";
- 		document.getElementById("fullnameError").innerHTML="";
+ 		document.getElementById("nameError").innerHTML = "";
+ 		document.getElementById("fullnameError").innerHTML = "";
  	}
 
 }
@@ -128,13 +128,56 @@ function ValidateRegister() {
 	}
 	if (document.getElementById("name").value == "" && document.getElementById("employerRadio").checked) {
 		document.getElementById("nameError").innerHTML="Please enter a company name";
+		valid = false;
 	}
 	if (document.getElementById("fullname").value == "" && document.getElementById("jobSeekerRadio").checked) {
 		document.getElementById("fullnameError").innerHTML="Please enter your name";
+		valid = false;
 	}
 	return valid;
 }
 
-function submitForm() {
-    document.getElementById('jobSeekerSkillForm').submit();
+function ValidateApplication() {
+	valid = true;
+	var intRegex = /^\d+$/;
+	if(!intRegex.test(parseInt(document.getElementById("rating").value))) {
+		document.getElementById("numberError").innerHTML="Please enter a whole number between 1 and 100";
+		valid = false;
+	}
+	return valid;
 }
+
+function ValidateAddLocation() {
+	valid = true;
+	var intRegex = /^\d+$/;
+	if (document.getElementById("street1").value.length > 0 || document.getElementById("street2").value.length > 0 || document.getElementById("town").value.length > 0 || document.getElementById("county").value.length > 0 || document.getElementById("country").value.length > 0 ) {
+
+	} else {
+		document.getElementById("addressError").innerHTML="Please enter at least one address field";
+		valid = false;
+	}
+	return valid;
+}
+
+function ValidateJobPosting() {
+	valid = true;
+	var intRegex = /^\d+$/;
+	if(!intRegex.test(parseInt(document.getElementById("salary").value))) {
+		document.getElementById("salaryError").innerHTML="Please enter a whole number between 1 and 99999999 without commas or full stops.";
+		valid = false;
+	}
+	if (document.getElementById("jobDescription").value == "") {
+		document.getElementById("descriptionError").innerHTML="Please enter a job description";
+		valid = false;
+	}
+	if (document.getElementById("name").value == "") {
+		document.getElementById("nameError").innerHTML="Please enter a job name";
+		valid = false;
+	}
+	if (document.getElementById("length").value == "") {
+		document.getElementById("lengthError").innerHTML="Please enter length of Contract";
+		valid = false;
+	}
+	return valid;
+}
+

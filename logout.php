@@ -45,6 +45,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="homecheck.php">Home</a></li>
+              <li><a href="joblistings.php">Job Listings</a></li>
               <li><a href="register.php">Register</a></li>
               <li class="active"><a href="logout.php">Log Out</a></li>
               <li><a href="signin.php">Log In</a></li>

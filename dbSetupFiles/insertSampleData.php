@@ -10,6 +10,7 @@ storeUser('johnsmith','example@email.com','secret1');
 storeUser('johndoe','example2@email.com','secret1');
 storeUser('janesmith','example3@email.com','secret1');
 storeUser('fredwhite','example4@email.com','secret1');
+storeUser('fredblack','example5@email.com','secret1');
 
 $insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(1, 'Mrs', 'Maeve Tracy','1 Apple Street','Apple Way','Orchard Town','County Pie','Ireland','01 555 3321', '086 000 8888')";
 mysql_query($insert);
@@ -19,7 +20,10 @@ $insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, address
 mysql_query($insert);
 
 
-$insert="INSERT INTO companies(userID, name) VALUES(3, 'Big Cheese Inc.')";
+$insert="INSERT INTO companies(userID, companyName) VALUES(3, 'Big Cheese Inc.')";
+mysql_query($insert);
+
+$insert="INSERT INTO companies(userID, companyName) VALUES(5, 'We Sell Stuff')";
 mysql_query($insert);
 
 $insert="INSERT INTO companyLocations(companyID, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry) VALUES(1, '1 Main Street','Big Town','Capital City','County Dublin','Ireland')";
@@ -28,63 +32,66 @@ mysql_query($insert);
 $insert="INSERT INTO companyLocations(companyID, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry) VALUES(1, 'Suite 2','55 Long Street','New York','New York','USA')";
 mysql_query($insert);
 
-
-$insert="INSERT INTO contractTypes (name, description) VALUES('Full Time','At least 39 hours a week')";
-mysql_query($insert);
-
-$insert="INSERT INTO contractTypes (name, description) VALUES('Part Time','Up to 20 hours a week')";
-mysql_query($insert);
-
-$insert="INSERT INTO contractTypes (name, description) VALUES('Flexi Time','Agreed period of work. Start and finish times vary')";
-mysql_query($insert);
-
-$insert="INSERT INTO contractTypes (name, description) VALUES('Temporary','Duration of Work is not permenant')";
+$insert="INSERT INTO companyLocations(companyID, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry) VALUES(2, 'Suite 5','55 Long Street','New York','New York','USA')";
 mysql_query($insert);
 
 
-$insert="INSERT INTO skills (name, description) VALUES('CSS','Cascading Style Sheets')";
+$insert="INSERT INTO contractTypes (contractName, description) VALUES('Full Time','At least 39 hours a week')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Java','programming language')";
+$insert="INSERT INTO contractTypes (contractName, description) VALUES('Part Time','Up to 20 hours a week')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('JavaScript','programming language')";
+$insert="INSERT INTO contractTypes (contractName, description) VALUES('Flexi Time','Agreed period of work. Start and finish times vary')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('C++','programming language')";
+$insert="INSERT INTO contractTypes (contractName, description) VALUES('Temporary','Duration of Work is not permenant')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('C#','programming language')";
+
+$insert="INSERT INTO skills (skillName, description) VALUES('CSS','Cascading Style Sheets')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Python','programming language')";
+$insert="INSERT INTO skills (skillName, description) VALUES('Java','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('PHP','programming language')";
+$insert="INSERT INTO skills (skillName, description) VALUES('JavaScript','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('MySQL','Database Language')";
+$insert="INSERT INTO skills (skillName, description) VALUES('C++','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('SQLServer','Database Language')";
+$insert="INSERT INTO skills (skillName, description) VALUES('C#','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Project Management','Project Management')";
+$insert="INSERT INTO skills (skillName, description) VALUES('Python','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Team Management','Team Management')";
+$insert="INSERT INTO skills (skillName, description) VALUES('PHP','programming language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Customer Service','Customer Service')";
+$insert="INSERT INTO skills (skillName, description) VALUES('MySQL','Database Language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Database Management','Database Management')";
+$insert="INSERT INTO skills (skillName, description) VALUES('SQLServer','Database Language')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Accounting','Accounting')";
+$insert="INSERT INTO skills (skillName, description) VALUES('Project Management','Project Management')";
 mysql_query($insert);
 
-$insert="INSERT INTO skills (name, description) VALUES('Cryptography','Cryptography')";
+$insert="INSERT INTO skills (skillName, description) VALUES('Team Management','Team Management')";
+mysql_query($insert);
+
+$insert="INSERT INTO skills (skillName, description) VALUES('Customer Service','Customer Service')";
+mysql_query($insert);
+
+$insert="INSERT INTO skills (skillName, description) VALUES('Database Management','Database Management')";
+mysql_query($insert);
+
+$insert="INSERT INTO skills (skillName, description) VALUES('Accounting','Accounting')";
+mysql_query($insert);
+
+$insert="INSERT INTO skills (skillName, description) VALUES('Cryptography','Cryptography')";
 mysql_query($insert);
 
 
@@ -95,7 +102,7 @@ $insert="INSERT INTO jobSeekerSkills (skillID, jobSeekerID) VALUES(1,1)";
 mysql_query($insert);
 
 
-$insert="INSERT INTO jobPositions (companyLocationID, name, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(1, 'Junior Accountant',1,'1 year','Assistant to head accountant. Needs to understand big number things and work in a team. Will be expected to learn fast a not steal things', 22000)";
+$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(1, 'Junior Accountant',1,'1 year','Assistant to head accountant. Needs to understand big number things and work in a team. Will be expected to learn fast a not steal things', 22000)";
 mysql_query($insert);
 
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(12,1)";
@@ -103,7 +110,7 @@ mysql_query($insert);
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(14,1)";
 mysql_query($insert);
 
-$insert="INSERT INTO jobPositions (companyLocationID, name, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(2, 'Junior Java Programmer',1,'2 years','Must understand Java to a high level. Previous experience is a must. We like nice people so mean people need not apply.', 32000)";
+$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(2, 'Junior Java Programmer',1,'2 years','Must understand Java to a high level. Previous experience is a must. We like nice people so mean people need not apply.', 32000)";
 mysql_query($insert);
 
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(2,2)";
@@ -115,14 +122,37 @@ mysql_query($insert);
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(9,2)";
 mysql_query($insert);
 
+$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(3, 'Senior Accountant',1,'5 years','Be The head accountant. Needs to mega understand big number things and work in a team. Will be expected to learn fast a not steal things', 50000)";
+mysql_query($insert);
+
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(12,3)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(14,3)";
+mysql_query($insert);
+
+$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(2, 'Head Honcho',1,'10 years','Rule us all', 1000000)";
+mysql_query($insert);
+
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(5,4)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(4,4)";
+mysql_query($insert);
+$insert="INSERT INTO positionSkills (skillID, positionID) VALUES(9,4)";
+mysql_query($insert);
+
 $nowFormat = date('Y-m-d H:i:s');
 
 $insert="INSERT INTO jobAdvertisements (positionID, dateActivated) VALUES (1,'$nowFormat')";
 mysql_query($insert);
 $insert="INSERT INTO jobAdvertisements (positionID, dateActivated) VALUES (2,'$nowFormat')";
 mysql_query($insert);
+$insert="INSERT INTO jobAdvertisements (positionID, dateActivated, dateDeactivated) VALUES (4,'$nowFormat','$nowFormat')";
+mysql_query($insert);
 
 $insert="INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES (2,1,'$nowFormat','Please hire me. I need money.',0,0)";
+mysql_query($insert);
+
+$insert="INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES (3,1,'$nowFormat','Please hire me. Im real good with numbers.',0,0)";
 mysql_query($insert);
 
 function storeUser($username, $email, $password) {

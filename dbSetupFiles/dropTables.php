@@ -7,6 +7,7 @@ $db = new DB_Connect();
 $db->connect();
 
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`positionSkills`') or die(mysql_error());
+mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`contractTypes`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobAdvertisements`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobApplications`') or die(mysql_error());
 mysql_query('DROP TABLE IF EXISTS `maeveroo_jobsearch`.`jobPositions`') or die(mysql_error());

@@ -21,24 +21,26 @@ class userFunctions {
     /**
      * Get user skills
      */
-    public function getUserSkills($jobSeeker_id) {
-        $result = mysql_query("SELECT * "
-        				."FROM companies "
-        				."INNER JOIN companyLocations "
-        				."ON companies.company_id=companyLocations.companyID "
-        				."WHERE companyLocations.location_id = '$jobSeeker_id'") or die(mysql_error());
+    public function getUserSkills() {
+       $result = mysql_query("SELECT * FROM contractTypes") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
-        echo $no_of_rows;
         if ($no_of_rows > 0) {
-            $result = mysql_fetch_array($result);
-			return $result['name'];
+            $return_arr = array();
+			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+				echo $row['contractName'];
+				echo $row['contract_id'];
+				array_push($return_arr,$row_array);
+			}
+			return $return_arr;
+        } else {
+            return array();
         }
     }
 
 }
 
 $newclass = new userFunctions();
-echo $newclass->getUserSkills(1);
+echo $newclass->getUserSkills();
 
 ?>

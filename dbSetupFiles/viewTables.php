@@ -87,7 +87,7 @@ while($row = mysql_fetch_array($result))
   echo "<tr>";
   echo "<td>" . $row['company_id'] . "</td>";
   echo "<td>" . $row['userID'] . "</td>";
-  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['companyName'] . "</td>";
   echo "</tr>";
   }
 echo "</table></br></br>";
@@ -138,7 +138,7 @@ while($row = mysql_fetch_array($result))
   {
   echo "<tr>";
   echo "<td>" . $row['contract_id'] . "</td>";
-  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['contractName'] . "</td>";
   echo "<td>" . $row['description'] . "</td>";
   echo "</tr>";
   }
@@ -160,7 +160,7 @@ while($row = mysql_fetch_array($result))
   {
   echo "<tr>";
   echo "<td>" . $row['skill_id'] . "</td>";
-  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['skillName'] . "</td>";
   echo "<td>" . $row['description'] . "</td>";
   echo "</tr>";
   }
@@ -227,7 +227,7 @@ while($row = mysql_fetch_array($result))
   echo "<tr>";
   echo "<td>" . $row['position_id'] . "</td>";
   echo "<td>" . $row['companyLocationID'] . "</td>";
-  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['positionName'] . "</td>";
   echo "<td>" . $row['contractTypeID'] . "</td>";
   echo "<td>" . $row['lengthOfContract'] . "</td>";
   echo "<td>" . $row['jobDescription'] . "</td>";

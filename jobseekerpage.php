@@ -59,6 +59,7 @@
 			<?php } ?>
             <ul class="nav">
               <li class="active"><a href="homecheck.php">Home</a></li>
+              <li><a href="joblistings.php">Job Listings</a></li>
               <li><a href="register.php">Register</a></li>
               <li><a href="logout.php">Log Out</a></li>
               <li><a href="signin.php">Log In</a></li>
@@ -87,29 +88,32 @@
 
 			<div class="span9">
 
+
 				<h3>My Skills</h3>
 					<form method="POST" id="jobSeekerSkillForm" action="registerpost.php" onsubmit="return ValidateRegister()">
 						<input type="hidden" name="tag" value="addjobseekerskills"/>
+						<!-- checks if user has skill and checks box if he/she does -->
+						<!-- submits form and reloads page when user clicks checkbox -->
 						<div class="span3">
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="1" <?php if (in_array("CSS",$_SESSION['skills'])) echo checked; ?>/> CSS<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="2" <?php if (in_array("Java",$_SESSION['skills'])) echo checked; ?>/> Java<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="3" <?php if (in_array("JavaScript",$_SESSION['skills'])) echo checked; ?>/> Javascript<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="4" <?php if (in_array("C++",$_SESSION['skills'])) echo checked; ?>/> C++<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="5" <?php if (in_array("C#",$_SESSION['skills'])) echo checked; ?>/> C#<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="1" <?php if (count($_SESSION['skills']) > 0 && in_array("CSS",$_SESSION['skills'])) echo checked; ?>/> CSS<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="2" <?php if (count($_SESSION['skills']) > 0 && in_array("Java",$_SESSION['skills'])) echo checked; ?>/> Java<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="3" <?php if (count($_SESSION['skills']) > 0 && in_array("JavaScript",$_SESSION['skills'])) echo checked; ?>/> Javascript<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="4" <?php if (count($_SESSION['skills']) > 0 && in_array("C++",$_SESSION['skills'])) echo checked; ?>/> C++<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="5" <?php if (count($_SESSION['skills']) > 0 && in_array("C#",$_SESSION['skills'])) echo checked; ?>/> C#<br/>
 						</div>
 						<div class="span3">
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="6" <?php if (in_array("Python",$_SESSION['skills'])) echo checked; ?>/> Python<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="7" <?php if (in_array("PHP",$_SESSION['skills'])) echo checked; ?>/> PHP<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="8" <?php if (in_array("MySQL",$_SESSION['skills'])) echo checked; ?>/> MySQL<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="9" <?php if (in_array("SQLServer",$_SESSION['skills'])) echo checked; ?>/> SQLServer<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="10" <?php if (in_array("Project Management",$_SESSION['skills'])) echo checked; ?>/> Project Management<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="6" <?php if (count($_SESSION['skills']) > 0 && in_array("Python",$_SESSION['skills'])) echo checked; ?>/> Python<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="7" <?php if (count($_SESSION['skills']) > 0 && in_array("PHP",$_SESSION['skills'])) echo checked; ?>/> PHP<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="8" <?php if (count($_SESSION['skills']) > 0 && in_array("MySQL",$_SESSION['skills'])) echo checked; ?>/> MySQL<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="9" <?php if (count($_SESSION['skills']) > 0 && in_array("SQLServer",$_SESSION['skills'])) echo checked; ?>/> SQLServer<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="10" <?php if (count($_SESSION['skills']) > 0 && in_array("Project Management",$_SESSION['skills'])) echo checked; ?>/> Project Management<br/>
 						</div>
 						<div class="span3">
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="11" <?php if (in_array("Team Management",$_SESSION['skills'])) echo checked; ?>/> Team Management<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="12" <?php if (in_array("Customer Service",$_SESSION['skills'])) echo checked; ?>/> Customer Service<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="13" <?php if (in_array("Database Management",$_SESSION['skills'])) echo checked; ?>/> Database Management<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="14" <?php if (in_array("Accounting",$_SESSION['skills'])) echo checked; ?>/> Accounting<br/>
-							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="15" <?php if (in_array("Cryptography",$_SESSION['skills'])) echo checked; ?>/> Cryptography<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="11" <?php if (count($_SESSION['skills']) > 0 && in_array("Team Management",$_SESSION['skills'])) echo checked; ?>/> Team Management<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="12" <?php if (count($_SESSION['skills']) > 0 && in_array("Customer Service",$_SESSION['skills'])) echo checked; ?>/> Customer Service<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="13" <?php if (count($_SESSION['skills']) > 0 && in_array("Database Management",$_SESSION['skills'])) echo checked; ?>/> Database Management<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="14" <?php if (count($_SESSION['skills']) > 0 && in_array("Accounting",$_SESSION['skills'])) echo checked; ?>/> Accounting<br/>
+							<input onchange="this.form.submit()" type="checkbox" name="skills[]" value="15" <?php if (count($_SESSION['skills']) > 0 && in_array("Cryptography",$_SESSION['skills'])) echo checked; ?>/> Cryptography<br/>
 						</div>
 					</form>
 					<br><br>
@@ -123,17 +127,21 @@
 					require_once 'userFunctions.php';
     				$db = new userFunctions();
     				$jobSeeker_id=$_SESSION['jobSeekerID'];
-    				$applications = $db->getUserApplications($jobSeeker_id);
+
+    				// Get users applications from db and loop through them to display
+    				$applications = $db->getUserApplications($jobSeeker_id); // returns array
     				if (count($applications) ==0) {
+    					echo "<div style='float:right' class='span9 well'>";
     					echo "<p>No Applications</p>";
+    					echo '</div>';
     				} else {
 						foreach ($applications as $application){
 							echo "<div style='float:right' class='span9 well'><div class='span6'>";
-								echo "<h4>Name of Position: " . $application['name'] . "</h4>";
+								echo "<h4>Name of Position: " . $application['positionName'] . "</h4>";
 								echo "<p><strong>Company Name:</strong> " . $application['companyName'] . "</p>";
 								echo "<p><strong>Location of Job:</strong></p><p> " . $application['address'] . "</p>";
 
-								echo "<p><strong>Date Of Application:</strong> " . $application['salary'] . "</p>";
+								echo "<p><strong>Date Of Application:</strong> " . $application['date'] . "</p>";
 								$reviewed = ($application['reviewed'] == 0 ? 'No' : 'Yes');
 								$responded = ($application['responded'] == 0 ? 'No' : 'Yes');
 								echo "<p><strong>Reviewed by Employer:</strong> " . $reviewed . "</p>";

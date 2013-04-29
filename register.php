@@ -48,6 +48,7 @@
 			<?php } ?>
             <ul class="nav">
               <li><a href="homecheck.php">Home</a></li>
+              <li><a href="joblistings.php">Job Listings</a></li>
               <li class="active"><a href="register.php">Register</a></li>
               <li><a href="logout.php">Log Out</a></li>
               <li><a href="signin.php">Log In</a></li>
@@ -75,9 +76,9 @@
 
 			<form method="POST" action="registerpost.php" onsubmit="return ValidateRegister()">
 				<div class="span6">
-					<input id="jobSeekerRadio" type="radio" name="userType" value="jobSeeker" onclick="javascript:Show()">
+					<input id="jobSeekerRadio" type="radio" name="userType" value="jobSeeker" onclick="ShowDiv()">
 					<label for="jobSeeker">Job Seeker</label><br>
-					<input id="employerRadio" type="radio" name="userType" value="employer" onclick="javascript:Show()">
+					<input id="employerRadio" type="radio" name="userType" value="employer" onclick="ShowDiv()">
 					<label for="employer">Employer</label><br>
 					<font color="red"><p id="userTypeError"></p></font>
 
@@ -125,19 +126,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="assets/js/jobsearch.js"></script>
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap-transition.js"></script>
-    <script src="assets/js/bootstrap-alert.js"></script>
-    <script src="assets/js/bootstrap-modal.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js"></script>
-    <script src="assets/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/js/bootstrap-tab.js"></script>
-    <script src="assets/js/bootstrap-tooltip.js"></script>
-    <script src="assets/js/bootstrap-popover.js"></script>
-    <script src="assets/js/bootstrap-button.js"></script>
-    <script src="assets/js/bootstrap-collapse.js"></script>
-    <script src="assets/js/bootstrap-carousel.js"></script>
-    <script src="assets/js/bootstrap-typeahead.js"></script>
+
 
   </body>
 </html>

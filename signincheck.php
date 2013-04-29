@@ -36,11 +36,11 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         		// session isn't started
         		session_start();
 			}
-			$_SESSION['name']=$admin["name"];
+			$_SESSION['name']=$admin["companyName"];
 			$_SESSION['userType']='employer';
 			$_SESSION['username']=$admin["username"];
 			$_SESSION['email']=$admin["email"];
-			$_SESSION['employerID']=$admin["employer_id"];
+			$_SESSION['employerID']=$admin["company_id"];
         	$url = "http://maeverooney.com/employerpage.php";
         } else {
             // user not found
