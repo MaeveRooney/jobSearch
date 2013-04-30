@@ -53,6 +53,18 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 
 		header( "Location: $url" );
         exit();
+    } elseif ($tag == 'applyforjob') {
+        if(session_id() == '') {
+			// session isn't started
+			session_start();
+		}
+		$_SESSION['flashMessage']="You successfully applied for position";
+		$url = "http://maeverooney.com/joblistings.php";
+		$position_id=(int) $_POST['positionID'];
+		$coverNote = $_POST['coverNote'];
+		$db->applyForJob($coverNote, $position_id, $_SESSION['jobSeekerID']);
+		header( "Location: $url" );
+        exit();
     } else {
         echo "Invalid Request";
     }

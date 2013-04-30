@@ -184,6 +184,10 @@ class userFunctions {
 				$thirdQuery="UPDATE jobAdvertisements SET dateDeactivated='$nowFormat' WHERE positionID='$positionID'";
 				mysql_query($thirdQuery);
 			}
+			$N = count($skillArray);
+			for($i=0; $i < $N; $i++){
+				$this->addPositionSkills($positionID, (int) $skillArray[$i]);
+			}
 
 			// If we arrive here, it means that no exception was thrown
 			// i.e. no query has failed, and we can commit the transaction
@@ -226,7 +230,7 @@ class userFunctions {
 				$row_array['positionID'] = $position_id;
 				$row_array['applicationID'] = $row['application_id'];
 				$row_array['positionName'] = $row['positionName'];
-				$date = date("d-m-Y", strtotime($row['date']));
+				$date = date("d/m/Y h:i", strtotime($row['date']));
 				$row_array['date'] = $date;
 				$row_array['coverNote'] = $row['coverNote'];
 				$contractID = $row['contractTypeID'];
@@ -272,7 +276,7 @@ class userFunctions {
 				$row_array['positionID'] = $position_id;
 				$row_array['positionName'] = $row['positionName'];
 				$row_array['applicationID'] = $row['application_id'];
-				$date = date("d-m-Y", strtotime($row['date']));
+				$date = date("d/m/Y h:i", strtotime($row['date']));
 				$row_array['date'] = $date;
 				$row_array['coverNote'] = $row['coverNote'];
 				$result2 = mysql_query("SELECT * FROM jobSeekers INNER JOIN users ON jobSeekers.userID=users.user_id WHERE jobSeekers.jobSeeker_id = '$jobSeekerID'") or die(mysql_error());
@@ -337,7 +341,10 @@ class userFunctions {
         				."ON jobAdvertisements.positionID=jobPositions.position_id "
         				."INNER JOIN companyLocations "
         				."ON companyLocations.location_id=jobPositions.companyLocationID "
-        				."WHERE jobAdvertisements.dateDeactivated is NULL") or die(mysql_error());
+        				."INNER JOIN companies "
+        				."ON companies.company_id=companyLocations.companyID "
+        				."WHERE jobAdvertisements.dateDeactivated is NULL "
+        				."ORDER BY jobAdvertisements.dateActivated DESC") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
@@ -350,6 +357,20 @@ class userFunctions {
 				$row_array['positionID'] = $position_id;
 				$row_array['positionName'] = $row['positionName'];
 				$row_array['ad_id'] = $row['ad_id'];
+				$row_array['skillArray'] = $this->getPositionSkills($position_id);
+				$row_array['salary'] = $row['salary'];
+				$row_array['jobDescription'] = $row['jobDescription'];
+				$date = date("d/m/Y h:i", strtotime($row['dateActivated']));
+				$row_array['dateActivated'] = $date;
+				$row_array['lengthOfContract'] = $row['lengthOfContract'];
+				$contractID = $row['contractTypeID'];
+				$result2 = mysql_query("SELECT contractName FROM contractTypes WHERE contract_id = '$contractID'") or die(mysql_error());
+				// check for result
+				$no_of_rows = mysql_num_rows($result2);
+				if ($no_of_rows > 0) {
+					$result2 = mysql_fetch_array($result2);
+					$row_array['contract'] = $result2['contractName'];
+				}
 				array_push($return_arr,$row_array);
 			}
 			return $return_arr;
@@ -413,10 +434,8 @@ class userFunctions {
 				$row_array['positionID'] = $position_id;
 				$row_array['positionName'] = $row['positionName'];
 				$row_array['companyName'] = $row['companyName'];
-				$row_array['dateActivated'] = $row['dateActivated'];
-				$row_array['dateDeactivated'] = $row['dateDeactivated'];
-				$date = date("d-m-Y", strtotime($row['date']));
-				$row_array['date'] = $date;
+				$row_array['dateActivated'] = date("d/m/Y h:i", strtotime($row['dateActivated']));
+				$row_array['dateDeactivated'] = date("d/m/Y h:i", strtotime($row['dateDeactivated']));
 				$row_array['coverNote'] = $row['coverNote'];
 				$contractID = $row['contractTypeID'];
 				$result2 = mysql_query("SELECT contractName FROM contractTypes WHERE contract_id = '$contractID'") or die(mysql_error());
@@ -598,6 +617,13 @@ class userFunctions {
     }
 
     /**
+     * add user skills
+     */
+    public function addPositionSkills($position_id, $skill_id) {
+        $result = @mysql_query("INSERT INTO positionSkills (skillID, positionID) values ('$skill_id','$position_id')");
+    }
+
+    /**
      * remove user skills
      */
     public function deleteUserSkills($jobSeeker_id) {
@@ -616,6 +642,15 @@ class userFunctions {
      */
     public function respondToApplication($application_id ) {
         $result = @mysql_query("UPDATE jobApplications SET responded=1 WHERE application_id='$application_id'");
+    }
+
+    /**
+     * apply for job
+     */
+    public function applyForJob($coverNote, $position_id, $jobSeekerID) {
+    	$nowFormat = date('Y-m-d H:i:s');
+    	$query = "INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES('$position_id','$jobSeekerID','$nowFormat','$coverNote',0,0)";
+        $result = mysql_query($query)or die(mysql_error());
     }
 
     /**

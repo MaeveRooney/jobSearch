@@ -122,7 +122,7 @@ mysql_query($insert);
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(9,2)";
 mysql_query($insert);
 
-$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(3, 'Senior Accountant',1,'5 years','Be The head accountant. Needs to mega understand big number things and work in a team. Will be expected to learn fast a not steal things', 50000)";
+$insert="INSERT INTO jobPositions (companyLocationID, positionName, contractTypeID, lengthOfContract, jobDescription, salary) VALUES(3, 'Senior Accountant',1,'5 years','Be The head accountant. Needs to mega understand big number things and work in a team. Will be expected to learn fast and not steal things', 50000)";
 mysql_query($insert);
 
 $insert="INSERT INTO positionSkills (skillID, positionID) VALUES(12,3)";

@@ -105,7 +105,7 @@
 			  </div><!--/.well -->
 			</div><!--/span-->
 
-			<form method="POST" action="handleAd.php" id="jobForm" onsubmit="return ValidateJobPosting()">
+			<form method="POST" action="handleAd.php" id="jobForm"">
 					<input type="hidden" name="tag" value="postAd"/>
 					<div class="span9">
 						<h5>Choose skills required for position</h5>

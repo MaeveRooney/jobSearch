@@ -106,6 +106,23 @@ if (isset($_POST['userType']) && $_POST['userType'] != '') {
 		$_SESSION['skills'] = $db->getUserSkills($jobSeeker_id);
 		header( "Location: $url" );
         exit();
+    } elseif ($tag == 'addjobseekerskillsapply') {
+        if(session_id() == '') {
+			// session isn't started
+			session_start();
+		}
+		$position_id = $_POST['positionID'];
+		$url = "http://maeverooney.com/applyforjob.php?positionID=".$position_id;
+		$jobSeeker_id=(int) $_SESSION['jobSeekerID'];
+		$db->deleteUserSkills($jobSeeker_id);
+		$skillArray = $_POST['skills'];
+		$N = count($skillArray);
+		for($i=0; $i < $N; $i++){
+			$db->addUserSkills($jobSeeker_id, (int) $skillArray[$i]);
+		}
+		$_SESSION['skills'] = $db->getUserSkills($jobSeeker_id);
+		header( "Location: $url" );
+        exit();
     } elseif ($tag == 'rateApplication') {
 		$application_id = $_POST['applicationID'];
 		$rating = (int) $_POST['rating'];
@@ -133,10 +150,9 @@ if (isset($_POST['userType']) && $_POST['userType'] != '') {
 		$town = $_POST['town'];
 		$county = $_POST['county'];
 		$country = $_POST['country'];
-		$employer_id = $_SESSION['employerID'];
 		$url = 'http://maeverooney.com/employerpage.php';
 		$_SESSION['flashMessage'] = "New location successfully added";
-		$db->addLocation($employer_id, $street1, $street2, $town, $county, $country);
+		$db->addLocation($_SESSION['employerID'], $street1, $street2, $town, $county, $country);
 		header( "Location: $url" );
         exit();
     }else {

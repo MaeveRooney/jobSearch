@@ -181,3 +181,12 @@ function ValidateJobPosting() {
 	return valid;
 }
 
+function ValidateApplyForm() {
+	valid = true;
+	if (document.getElementById("coverNote").value == "") {
+		document.getElementById("noteError").innerHTML="Please enter a cover note";
+		valid = false;
+	}
+	return valid;
+}
+

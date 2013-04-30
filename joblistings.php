@@ -66,7 +66,25 @@
 
 		<div class="container-fluid">
 			<h1>Job Listings</h1>
+
+			<font color='blue'><p><strong>
+			<?php
+					//retrieve session data
+					if(isset($_SESSION['flashMessage'])){
+						echo $_SESSION['flashMessage'];
+						unset($_SESSION['flashMessage']);
+					}
+				?>
+			</strong></p></font>
 			<br/><br/>
+			<font color='red'><p><strong>
+				<?php
+					if(isset($_SESSION['error'])){
+						echo $_SESSION['error'];
+						unset($_SESSION['error']);
+  					}
+				?>
+			</strong></p></font>
 		  <div class="row-fluid">
 			<div class="span3">
 			  <div class="well sidebar-nav">
@@ -91,12 +109,10 @@
     					echo "<p>No Positions</p>";
     				} else {
 						foreach ($positions as $position){
-							echo '<div style="float:right" class="span9">';
-							echo '<h3>Job Applications for '.$position['positionName'].'</h3>';
-							echo '</div>';
 							$position_id = $position['positionID'];
-							echo "<div style='float:right; border: 1px solid; padding:10px; margin:10px' class='span9'><div class='span6'>";
+							echo "<div style='float:right' class='span9 well'><div class='span6'>";
 								echo "<h4>Name of Position: " . $position['positionName'] . "</h4>";
+								echo "<p><strong>Company:</strong></p><p> " . $position['companyName'] . "</p>";
 								echo "<p><strong>Location of Job:</strong></p><p> " . $position['address'] . "</p>";
 								echo "<p><strong>Date of Ad Activation:</strong></p><p> " . $position['dateActivated'] . "</p>";
 								echo "<p><strong>Job Description:</strong></p><p> " . $position['jobDescription'] . "</p>";
@@ -112,62 +128,11 @@
 							echo "<br>";
 							echo "<h5>Contract Type:</h5><p> " . $position['contract'] . "</p>";
 							echo "<h5>Salary:</h5><p> €" . $position['salary'] . " per year</p>";
-							echo "<h5>Length Of Contract:</h5><p> " . $position['lengthOfContract'] . "</p>";
+							echo "<h5>Length Of Contract:</h5><p> " . $position['lengthOfContract'] . "</p><br>";
+							echo "<form method='GET' action='applyforjob.php'><input type='hidden' name='positionID' value='".$position_id."'/>";
+							echo "<button class='btn btn-large btn-primary' type='submit'>Apply For Position</button></form>";
 							echo "</div></div>";
 
-
-							$applications = $db->getApplicantsForPosition($position_id);
-							echo "<div style='float:right' class='span8 well'>";
-							if (count($applications) ==0) {
-    								echo "<p>No applications for this position</p>";
-    						} else {
-								foreach ($applications as $application){
-									echo "<div class='span5'>";
-									echo "<p><strong>Name of Applicant:</strong></p><p> " . $application['jobSeekerName'] . "</p>";
-									echo "<p><strong>Applicant contact Info:</strong></p><p>Landline: " . $application['jobSeekerLandline'] ."</p><p>Mobile: ". $application['jobSeekerMobile'] ."</p><p>Email: ". $application['jobSeekerEmail'] ."</p>";
-									echo "<p><strong>Date Of Application:</strong> " . $application['date'] . "</p>";
-									echo "<p><strong>Applicants Cover Note:</strong></p><p> " . $application['coverNote'] . "</p><br>";
-									$reviewed = $application['reviewed'];
-									$responded = $application['responded'];
-									$rating = $application['rating'];
-									$applicationID = $application['applicationID'];
-									if ($responded == 0){
-										echo '<form method="POST" action="registerpost.php">';
-										echo '<input type="hidden" name="tag" value="responsedToApplication"/>';
-										echo '<input type="hidden" name="position_id" value="'.$position_id.'"/>';
-										echo '<input type="hidden" name="applicationID" value="'.$applicationID.'"/>';
-										echo '<input onchange="this.form.submit()" type="checkbox" name="responded" value="1"/> Check this box if you have contacted applicant<br><br>';
-										echo '</form>';
-									} else {
-										echo '<p><strong>Responded to Applicant:</strong> Yes</p>';
-									}
-									if ($rating == null){
-										echo '<form method="POST" action="registerpost.php" onsubmit="return ValidateApplication()">';
-										echo '<input type="hidden" name="tag" value="rateApplication"/>';
-										echo '<input type="hidden" name="position_id" value="'.$position_id.'"/>';
-										echo '<input type="hidden" name="applicationID" value="'.$applicationID.'"/>';
-										echo 'Rate Application out of 100 <input onchange="this.form.submit()" maxlength="3" type="text" id="rating" name="rating"/>';
-										echo '<font color="red"><p id="numberError"></p></font>';
-										echo '</form>';
-
-									} else {
-										echo "<p><strong>Rating of Application is:</strong> " . $rating . "/100</p>";
-									}
-									echo "</div>";
-									echo "<div class='span3' style='float:right'>";
-									$applicantSkills = $db->getUserSkills($application['jobSeekerID']);
-									echo "<h5>Applicants Skills:</h5>";
-									if (count($applicantSkills) > 0){
-										foreach ($applicantSkills as $skill){
-											echo $skill . "<br>";
-										}
-									}
-									echo "</div></div>";
-								}
-    						}
-
-
-							echo "</div>";
 						}
 					}
     			?>
