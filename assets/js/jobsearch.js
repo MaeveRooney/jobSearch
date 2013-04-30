@@ -11,6 +11,10 @@ function ShowDiv() {
 
 function CheckUsernameAvailable(str) {
 	var xmlhttp;
+	if (str.indexOf(" ") > 0){
+		document.getElementById("usernameError").innerHTML = "No spaces allowed in username";
+	  	return false;
+	}
 	if (str.length == 0)
 	  {
 	  document.getElementById("usernameError").innerHTML = "";

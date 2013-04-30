@@ -21,6 +21,7 @@ class userFunctions {
      * check username available
      */
     public function checkUsernameAvailable($username) {
+    	$username = mysql_real_escape_string($username);
         $result = mysql_query("SELECT * FROM users WHERE username = '$username'") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
@@ -36,6 +37,7 @@ class userFunctions {
      * check email available
      */
     public function checkEmailAvailable($email) {
+    	$email = mysql_real_escape_string($email);
         $result = mysql_query("SELECT * FROM users WHERE email = '$email'") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
@@ -51,6 +53,8 @@ class userFunctions {
      * Get user by username and password
      */
     public function getUserByUsernameAndPassword($username, $password) {
+    	$username = mysql_real_escape_string($username);
+    	$password = mysql_real_escape_string($password);
         $result = mysql_query("SELECT * "
         				."FROM users "
         				."INNER JOIN jobSeekers "
@@ -78,6 +82,8 @@ class userFunctions {
      * Get user by username and password
      */
     public function getAdminByUsernameAndPassword($username, $password) {
+    	$username = mysql_real_escape_string($username);
+    	$password = mysql_real_escape_string($password);
         $result = mysql_query("SELECT * "
         				."FROM users "
         				."INNER JOIN companies "
@@ -105,6 +111,18 @@ class userFunctions {
      * add jobseeker to db transaction
      */
     public function addJobSeeker($username, $password, $email, $title, $fullname, $street1, $street2, $town, $county, $country, $landline, $mobile) {
+    	$password = mysql_real_escape_string($password);
+    	$username = mysql_real_escape_string($username);
+    	$email = mysql_real_escape_string($email);
+    	$title = mysql_real_escape_string($title);
+    	$fullname = mysql_real_escape_string($fullname);
+    	$street1 = mysql_real_escape_string($street1);
+    	$street2 = mysql_real_escape_string($street2);
+    	$town = mysql_real_escape_string($town);
+    	$county = mysql_real_escape_string($county);
+    	$country = mysql_real_escape_string($country);
+    	$landline = mysql_real_escape_string($landline);
+    	$mobile = mysql_real_escape_string($mobile);
 		$hash = $this->hashSSHA($password);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
@@ -135,6 +153,15 @@ class userFunctions {
      * add employer to db transaction
      */
     public function addEmployer($username, $password, $email, $name, $street1, $street2, $town, $county, $country) {
+    	$password = mysql_real_escape_string($password);
+    	$username = mysql_real_escape_string($username);
+    	$email = mysql_real_escape_string($email);
+    	$name = mysql_real_escape_string($name);
+    	$street1 = mysql_real_escape_string($street1);
+    	$street2 = mysql_real_escape_string($street2);
+    	$town = mysql_real_escape_string($town);
+    	$county = mysql_real_escape_string($county);
+    	$country = mysql_real_escape_string($country);
 		$hash = $this->hashSSHA($password);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
@@ -170,6 +197,9 @@ class userFunctions {
      * add job position
      */
     public function createJobPosition($location_id, $contract_id, $salary, $length, $description, $postnow, $skillArray, $name) {
+		$length = mysql_real_escape_string($length);
+    	$description = mysql_real_escape_string($description);
+    	$name = mysql_real_escape_string($name);
 		$nowFormat = date('Y-m-d H:i:s');
         try {
 			// First of all, let's begin a transaction
@@ -205,6 +235,11 @@ class userFunctions {
      * add employer location
      */
     public function addLocation($employer_id, $street1, $street2, $town, $county, $country) {
+    	$street1 = mysql_real_escape_string($street1);
+    	$street2 = mysql_real_escape_string($street2);
+    	$town = mysql_real_escape_string($town);
+    	$county = mysql_real_escape_string($county);
+    	$country = mysql_real_escape_string($country);
 		$query = "INSERT INTO companyLocations (companyID, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry) values('$employer_id','$street1', '$street2', '$town', '$county', '$country')";
 		mysql_query($query);
     }
@@ -648,6 +683,7 @@ class userFunctions {
      * apply for job
      */
     public function applyForJob($coverNote, $position_id, $jobSeekerID) {
+    	$coverNote = mysql_real_escape_string($coverNote);
     	$nowFormat = date('Y-m-d H:i:s');
     	$query = "INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES('$position_id','$jobSeekerID','$nowFormat','$coverNote',0,0)";
         $result = mysql_query($query)or die(mysql_error());

@@ -149,7 +149,7 @@
 								echo "<p><strong>Job Description:</strong></p><p> " . $application['jobDescription'] . "</p>";
 								echo "<p><strong>My Cover Note:</strong></p><p> " . $application['coverNote'] . "</p>";
 							echo "</div>";
-							echo "<div class='span3'>";
+							echo "<div style='float:right' class='span3'>";
 								$skills = $application['skillArray'];
 								if (count($skills) > 0){
 									echo "<h5>Skills required for position:</h5>";

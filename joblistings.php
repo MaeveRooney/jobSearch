@@ -55,7 +55,6 @@
               <li><a href="register.php">Register</a></li>
               <li><a href="logout.php">Log Out</a></li>
               <li><a href="signin.php">Log In</a></li>
-              <li><a href="postjob.php">Post Job</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

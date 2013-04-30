@@ -8,7 +8,7 @@
 	}
 	if ($_SESSION['jobSeekerID'] == '') {
 		$_SESSION['error']='You must be an Job Seeker to apply for job';
-        $url = "http://maeverooney.com/employerpage.php";
+        $url = "http://maeverooney.com/joblistings.php";
         header( "Location: $url" );
         exit();
 	}
