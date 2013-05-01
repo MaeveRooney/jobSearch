@@ -110,74 +110,79 @@
 					<div class="span9">
 						<h5>Choose skills required for position</h5>
 					</div>
+					<div class="span10">
 						<div class="span3">
 							<input type="checkbox" name="skills[]" value="1"/> CSS<br/>
 							<input type="checkbox" name="skills[]" value="2" /> Java<br/>
 							<input type="checkbox" name="skills[]" value="3" /> Javascript<br/>
 							<input type="checkbox" name="skills[]" value="4" /> C++<br/>
 							<input type="checkbox" name="skills[]" value="5" /> C#<br/>
-						</div>
+						</div> <!-- span3-->
 						<div class="span3">
 							<input type="checkbox" name="skills[]" value="6" /> Python<br/>
 							<input type="checkbox" name="skills[]" value="7" /> PHP<br/>
 							<input type="checkbox" name="skills[]" value="8" /> MySQL<br/>
 							<input type="checkbox" name="skills[]" value="9" /> SQLServer<br/>
 							<input type="checkbox" name="skills[]" value="10" /> Project Management<br/>
-						</div>
+						</div><!-- span3-->
 						<div class="span3">
 							<input type="checkbox" name="skills[]" value="11"/> Team Management<br/>
 							<input type="checkbox" name="skills[]" value="12"/> Customer Service<br/>
 							<input type="checkbox" name="skills[]" value="13"/> Database Management<br/>
 							<input type="checkbox" name="skills[]" value="14"/> Accounting<br/>
 							<input type="checkbox" name="skills[]" value="15"/> Cryptography<br/>
+						</div><!-- span3-->
 						</div>
 						<br><br>
-					<div class="span5">
-					<h5>Name of Position (required)</h5><input type="text" name="name" id="name" maxlength="50" placeholder="Name of Position"/><br>
-					<font color="red"><h5 id="nameError"></h5></font>
-					<br>
-					<h5>Choose Address of Job</h5>
-					<?php
-						echo "<select name='location_id'>";
-						foreach ($locations as $location){
-							$location_id = $location['location_id'];
-							$address = $location['address'];
-							echo "<option value='".$location_id."'>".$address."</option>";
-						}
-						echo "</select>";
-					?>
-					<br><br>
-					<h5>Select Contract Type</h5>
-					<?php
-						$contracts = $db->getContractTypes(); // returns array
-						echo "<select name='contract_id'>";
-						foreach ($contracts as $contract){
-							$contract_id = $contract['contract_id'];
-							$name = $contract['name'];
-							echo "<option value='".$contract_id."'>".$name."</option>";
-						}
-						echo "</select>";
-					?>
-					<br><br>
-					<h5>Length of Contract (eg '1 year')</h5><input type="text" name="length" id="length" maxlength="20" placeholder="Length of Contract"/><br>
-					<font color="red"><h5 id="lengthError"></h5></font>
-					<br>
-					<h5>Salary (€ per year)</h5><input maxlength="8" type="text" id="salary" name="salary"/>
-					<font color="red"><h5 id="salaryError"></h5></font>
-					<br><br>
-					<label for="male">Post Ad now</label>
-					<input type="radio" name="postnow" value="yes" checked/><br><br>
-				 	<label for="female">Post Ad later from home page</label>
-					<input type="radio" name="postnow" value="no"/>
-					<br><br>
-					<button class="btn btn-large btn-primary" type="submit">Post Job</button>
-					</form>
-					<br><br>
-				</div>
-				<div class="span4">
-					<h5>Job Description (required)</h5><textarea rows="4" cols="50" maxlength="400" id="jobDescription" name="jobDescription" form="jobForm"></textarea>
-					<font color="red"><h5 id="descriptionError"></h5></font>
-				</div>
+					<div class="span12">
+						<div style="float:right" class="span4">
+							<h5>Job Description (required)</h5><textarea rows="4" cols="50" maxlength="400" id="jobDescription" name="jobDescription" form="jobForm"></textarea>
+							<font color="red"><h5 id="descriptionError"></h5></font>
+						</div><!-- span4-->
+						<div style="float:right" class="span5">
+						<h5>Name of Position (required)</h5><input type="text" name="name" id="name" maxlength="50" placeholder="Name of Position"/><br>
+						<font color="red"><h5 id="nameError"></h5></font>
+						<br>
+						<h5>Choose Address of Job</h5>
+						<?php
+							echo "<select name='location_id'>";
+							foreach ($locations as $location){
+								$location_id = $location['location_id'];
+								$address = $location['address'];
+								echo "<option value='".$location_id."'>".$address."</option>";
+							}
+							echo "</select>";
+						?>
+						<br><br>
+						<h5>Select Contract Type</h5>
+						<?php
+							$contracts = $db->getContractTypes(); // returns array
+							echo "<select name='contract_id'>";
+							foreach ($contracts as $contract){
+								$contract_id = $contract['contract_id'];
+								$name = $contract['name'];
+								echo "<option value='".$contract_id."'>".$name."</option>";
+							}
+							echo "</select>";
+						?>
+						<br><br>
+						<h5>Length of Contract (eg '1 year')</h5><input type="text" name="length" id="length" maxlength="20" placeholder="Length of Contract"/><br>
+						<font color="red"><h5 id="lengthError"></h5></font>
+						<br>
+						<h5>Salary (€ per year)</h5><input maxlength="8" type="text" id="salary" name="salary"/>
+						<font color="red"><h5 id="salaryError"></h5></font>
+						<br><br>
+						<label for="male">Post Ad now</label>
+						<input type="radio" name="postnow" value="yes" checked/><br><br>
+						<label for="female">Post Ad later from home page</label>
+						<input type="radio" name="postnow" value="no"/>
+						<br><br>
+						<button class="btn btn-large btn-primary" type="submit">Post Job</button>
+						</form>
+						<br><br>
+					</div><!-- span5-->
+
+					</div><!-- span9-->
 
 
 

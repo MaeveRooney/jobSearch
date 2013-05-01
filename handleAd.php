@@ -58,11 +58,15 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 			// session isn't started
 			session_start();
 		}
-		$_SESSION['flashMessage']="You successfully applied for position";
 		$url = "http://maeverooney.com/joblistings.php";
 		$position_id=(int) $_POST['positionID'];
 		$coverNote = $_POST['coverNote'];
-		$db->applyForJob($coverNote, $position_id, $_SESSION['jobSeekerID']);
+		$application = $db->applyForJob($coverNote, $position_id, $_SESSION['jobSeekerID']);
+		if ($application){
+			$_SESSION['flashMessage']="You successfully applied for position";
+		} else {
+			$_SESSION['error']="That position is no longer available. Application not successful";
+		}
 		header( "Location: $url" );
         exit();
     } else {

@@ -107,7 +107,7 @@
         <input type="password" class="input-block-level" name="password" placeholder="Password">
         <br/>
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-        <a href="register">Register an account</a>
+        <a href="register.php">Register an account</a>
       </form>
 
 

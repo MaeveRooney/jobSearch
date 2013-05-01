@@ -102,8 +102,8 @@
 
 					require_once 'userFunctions.php';
     				$db = new userFunctions();
-    				// Get users applications from db and loop through them to display
     				$positions = $db->getActivePositions(); // returns array
+
     				if (count($positions) ==0) {
     					echo "<p>No Positions</p>";
     				} else {
@@ -129,7 +129,27 @@
 							echo "<h5>Salary:</h5><p> €" . $position['salary'] . " per year</p>";
 							echo "<h5>Length Of Contract:</h5><p> " . $position['lengthOfContract'] . "</p><br>";
 							echo "<form method='GET' action='applyforjob.php'><input type='hidden' name='positionID' value='".$position_id."'/>";
-							echo "<button class='btn btn-large btn-primary' type='submit'>Apply For Position</button></form>";
+							$jobSeeker_id=$_SESSION['jobSeekerID'];
+							if ($jobSeeker_id != ''){
+								// Get users applications from db and loop through them to display
+								$applications = $db->getUserApplications($jobSeeker_id);
+								$valid = true;
+								foreach ($applications as $application) {
+									if ($application['positionID'] == $position_id) {
+										$valid = false;
+									}
+								}
+								if ($valid) {
+									echo "<button class='btn btn-large btn-primary' type='submit'>Apply For Position</button></form>";
+								} else {
+									echo "<h5>You have already applied for this position. To view your application go to home page</h5>";
+								}
+
+							}
+							else {
+								echo "<button class='btn btn-large btn-primary' type='submit'>Apply For Position</button></form>";
+							}
+
 							echo "</div></div>";
 
 						}

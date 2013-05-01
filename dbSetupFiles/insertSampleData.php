@@ -12,11 +12,11 @@ storeUser('janesmith','example3@email.com','secret1');
 storeUser('fredwhite','example4@email.com','secret1');
 storeUser('fredblack','example5@email.com','secret1');
 
-$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(1, 'Mrs', 'Maeve Tracy','1 Apple Street','Apple Way','Orchard Town','County Pie','Ireland','01 555 3321', '086 000 8888')";
+$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(1, 'Mrs', 'John Smith','1 Apple Street','Apple Way','Orchard Town','County Pie','Ireland','01 555 3321', '086 000 8888')";
 mysql_query($insert);
-$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(2, 'Mr', 'Ian Tracy','2 Apple Street','Apple Way','Orchard Town','County Pie','Ireland','01 555 3322', '086 111 8888')";
+$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(2, 'Mr', 'Jane Smith','2 Apple Street','Apple Way','Orchard Town','County Pie','Ireland','01 555 3322', '086 111 8888')";
 mysql_query($insert);
-$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(4, 'Mr', 'Jim Beam','5 Main Street','Big Town','Capital City','County Dublin','Ireland','01 555 1111', '086 222 3333')";
+$insert="INSERT INTO jobSeekers(userID, title, fullName, addressStreet1, addressStreet2, addressTown, addressCounty, addressCountry, landline, mobile) VALUES(4, 'Mr', 'Fred White','5 Main Street','Big Town','Capital City','County Dublin','Ireland','01 555 1111', '086 222 3333')";
 mysql_query($insert);
 
 

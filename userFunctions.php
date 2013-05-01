@@ -685,8 +685,35 @@ class userFunctions {
     public function applyForJob($coverNote, $position_id, $jobSeekerID) {
     	$coverNote = mysql_real_escape_string($coverNote);
     	$nowFormat = date('Y-m-d H:i:s');
-    	$query = "INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES('$position_id','$jobSeekerID','$nowFormat','$coverNote',0,0)";
-        $result = mysql_query($query)or die(mysql_error());
+    	try {
+			// First of all, let's begin a transaction
+			mysql_query("BEGIN");
+
+			// A set of queries; if one fails, an exception should be thrown
+			$firstQuery = "SELECT positionID FROM jobAdvertisements WHERE dateDeactivated is NULL AND positionID='$position_id'" ;
+			$result = mysql_query($firstQuery);
+			// check to see if ad is still active
+			$no_of_rows = mysql_num_rows($result);
+			$secondQuery;
+			$committed = false;
+        	if ($no_of_rows > 0) {
+				$secondQuery = "INSERT INTO jobApplications (positionID, jobSeekerID, date, coverNote, reviewed, responded) VALUES('$position_id','$jobSeekerID','$nowFormat','$coverNote',0,0)";
+				$result = mysql_query($secondQuery)or die(mysql_error());
+				if ($result){
+        			$committed = true;
+        		}
+			}
+
+			// If we arrive here, it means that no exception was thrown
+			// i.e. no query has failed, and we can commit the transaction
+			mysql_query("COMMIT");
+			return $committed;
+		} catch (Exception $e) {
+			// An exception has been thrown
+			// We must rollback the transaction
+			mysql_query("ROLLBACK");
+			return false;
+		}
     }
 
     /**
